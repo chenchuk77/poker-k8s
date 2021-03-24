@@ -61,13 +61,11 @@ function process_request(url) {
     op_cards: op_cards,
     records: []
   }
-  //var data = cardsArrays(cards)
-  // empty list for results
-  //data.records = []
-
- console.log("cards: " + cards)
-
-
+  
+  // running samples and fill a data object to return
+  var wins = 0
+  var loses = 0
+  var draws = 0
   for (var i=0 ; i<samples ; i++ ){
     var deck = get_deck()
     console.log("deck: " + deck)
@@ -75,39 +73,41 @@ function process_request(url) {
     deck.pop(data.my_cards[1])
     deck.pop(data.op_cards[0])
     deck.pop(data.op_cards[1])
-    // add cards to my hand and to opp hand
     var my_temp_hand = [ my_cards[0], my_cards[1], deck[0], deck[1], deck[2], deck[3], deck[4] ]
     var op_temp_hand = [ op_cards[0], op_cards[1], deck[0], deck[1], deck[2], deck[3], deck[4] ]
-    //data.op_cards.push(deck[0], deck[1], deck[2], deck[3], deck[4])
-    // create a result record
+    var my_temp_rank = PokerEvaluator.evalHand(my_temp_hand) 
+    var op_temp_rank = PokerEvaluator.evalHand(op_temp_hand) 
+    var temp_result = 0
+    if (my_temp_rank.value > op_temp_rank.value) {
+      temp_result = 1;
+      wins ++;
+    } else if (my_temp_rank.value < op_temp_rank.value) {
+      temp_result = -1;
+      loses ++;
+    } else {
+      draws ++;
+    }
     var record = {
       board: deck[0] + deck[1] + deck[2] + deck[3] + deck[4], 
-      my_rank: PokerEvaluator.evalHand(my_temp_hand),
-      //my_rank: 100,
-      op_rank: PokerEvaluator.evalHand(op_temp_hand)	
-      //op_rank: 200	
+      my_rank: my_temp_rank.handName,
+      op_rank: op_temp_rank.handName,
+      result: temp_result
     }
     data.records.push(record)
   }
+  data.win_percent   = 100 * (wins/samples)
+  data.lost_percent  = 100 * (loses/samples)
+  data.draws_percent = 100 * (draws/samples)
   return data
 }
-
-// define cards in context
-//var cards = [];
 
 const requestHandler = (request, response) => {
   var url = request.url;
   console.log("received url: " + url);
   var results = process_request(url)
-  //var cardString = url.replace("/","");
   console.log("results: " + results);
   console.log(results);
-  //var rank = rankHand(buildCardArray(cardString));
-  //console.log("rank: " + JSON.stringify(rank));
-  //response.end(JSON.stringify(rank));
   response.end(JSON.stringify(results));
-  // clear context
-  //cards = [];
 }
 
 // start ranker server
@@ -116,7 +116,6 @@ server.listen(port, (err) => {
   if (err) {
     return console.log('something bad happened', err)
   }
-
   console.log(`ranking server is listening on ${port}`)
 })
 
