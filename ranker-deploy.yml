@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: holdem-ranker
+  labels:
+    layer: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      layer: ranker-backend
+  template:
+    metadata:
+      labels:
+        layer: ranker-backend
+    spec:
+      containers:
+      - name: holdem-ranker
+        image: chenchuk77/holdem-ranker:1.0
+        

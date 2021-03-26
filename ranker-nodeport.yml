@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ranker-svc
+  labels:
+    app: ranker-app
+spec:
+  type: NodePort
+  selector:
+    layer: ranker-backend
+  ports:
+  - port: 3000
+    nodePort: 32000
+    
