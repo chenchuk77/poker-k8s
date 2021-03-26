@@ -1,1 +1,1 @@
-docker build -t chenchuk/holdem-ranker:1.0 .
+docker build -t chenchuk77/holdem-ranker:1.0 .
