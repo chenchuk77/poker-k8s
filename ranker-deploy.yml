@@ -5,7 +5,7 @@ metadata:
   labels:
     layer: backend
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       layer: ranker-backend
@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: holdem-ranker
-        image: chenchuk77/holdem-ranker:1.0
+        image: chenchuk77/holdem-ranker:1.1
         

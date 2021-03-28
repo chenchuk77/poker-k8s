@@ -9,4 +9,4 @@ docker rm   $CONTAINER_NAME || true
 docker run -d \
 	   -p 3000:3000 \
 	   --name $CONTAINER_NAME \
-	   chenchuk77/holdem-ranker:1.0
+	   chenchuk77/holdem-ranker:1.1

@@ -98,6 +98,7 @@ function process_request(url) {
   data.win_percent   = 100 * (wins/samples)
   data.lost_percent  = 100 * (loses/samples)
   data.draws_percent = 100 * (draws/samples)
+  data.server_id = process.env.HOSTNAME
   return data
 }
 
