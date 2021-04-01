@@ -4,7 +4,8 @@ WORKDIR /usr/share/nginx
 
 RUN apt-get update && \
     apt-get install -y nodejs npm && \
-    npm install pixi.js
+    npm install pixi.js && \
+    npm install pixi-svg --save
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

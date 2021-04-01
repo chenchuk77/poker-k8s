@@ -1,16 +1,15 @@
 #!/bin/bash
 
-echo "rebuilding the image ..."
+CONTAINER_NAME=ranker-frontend
+
+echo "rebuilding the ${CONTAINER_NAME} image ..."
 ./rebuild.sh
 
-echo "starting container ..."
-CONTAINER_NAME=ranker-frontend
+echo "starting ${CONTAINER_NAME} container ..."
 
 docker stop $CONTAINER_NAME || true
 docker rm   $CONTAINER_NAME || true
 
-
-	 #  -d \
 docker run -d \
 	   -p 8090:80 \
 	   -v $(readlink -f html):/usr/share/nginx/html \

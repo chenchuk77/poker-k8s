@@ -1,0 +1,4 @@
+1. add pixi listeners to enable choose cards by clicking the images
+2. remove the upper divs, its just for development
+3. use svg cards instead of the png for better quality
+4. fix draw_cards() function to loop instead of code-duplication for each suite
