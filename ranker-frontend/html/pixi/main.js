@@ -96,6 +96,7 @@ function show_results(data){
 }
 
 function evaluate_hands(hands, samples){
+  //var url = "http://" + process.env.RANKER_ADDRESS + ":" + process.env.RANKER_PORT + "/" + hands + "/" + samples
   var url = "http://127.0.0.1:3000/" + hands + "/" + samples
   console.log(url)
   fetch(url)
@@ -112,7 +113,8 @@ function evaluate_hands(hands, samples){
 //This `setup` function will run when the image has loaded
 function setup() {
   draw_cards()
-  
+  console.log("client images loaded completely");
+  //console.log("ranker endpoint: " + process.env.RANKER_ADDRESS + ":" + process.env.RANKER_PORT ".");
   //let c1 = get_sprite('7h');
   //let c2 = get_sprite('9c');
   //app.stage.addChild(c1);

@@ -1,0 +1,4 @@
+# useful commands:\
+
+# restart nginx from inside the container
+$ nginx -s reload
