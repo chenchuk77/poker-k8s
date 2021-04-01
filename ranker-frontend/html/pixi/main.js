@@ -1,7 +1,8 @@
 //Create a Pixi Application
 let app = new PIXI.Application({ 
     width: 800, 
-    height: 600,                       
+    //height: 600,                       
+    height: 300,                       
     antialias: true, 
     transparent: false, 
     resolution: 1
@@ -79,8 +80,33 @@ function draw_cards(){
     app.stage.addChild(sprites[code])
   }
 }
-function evaluate_hands(hands){
-  alert (hands)
+
+function get_results(url, callback) {
+    fetch(url)
+       .then(response => response.json())
+       .then(json => callback(null, json.restaurants))
+       .catch(error => callback(error, null))
+}
+
+
+function show_results(data){
+  var res_string = data.my_cards + " wins " + data.win_percent + "%" + " vs. " + data.op_cards + " over " + data.records.length + " samples."
+  console.log(data);
+  document.getElementById("results").innerHTML = res_string;  
+}
+
+function evaluate_hands(hands, samples){
+  var url = "http://127.0.0.1:3000/" + hands + "/" + samples
+  console.log(url)
+  fetch(url)
+    .then(response => response.json())
+    .then(data => show_results(data));
+	
+//    .catch((error) => {
+//       console.error('holdem-ranker api returned an error:', error);
+//    });
+
+    //.then(data => console.log(data));
 }
 
 //This `setup` function will run when the image has loaded

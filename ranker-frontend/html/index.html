@@ -13,14 +13,22 @@
   </div>
 
   <div input>
-    <input type="text" id="cardsString" name="value" />
-    <input type="button" value="submit" onclick="evaluate_hands(document.getElementById('cardsString').value)" />
+    cards: <input type="text" id="cardsString" value="AdKdQdQh" name="value" />
+    <br />
+    samples: <input type="text" id="samples" value="100" name="value" />
+    <br />
+    <input type="button" value="submit" 
+       onclick="evaluate_hands(document.getElementById('cardsString').value, document.getElementById('samples').value)" />
     <hr />
   </div>
 
   <div id="pixi_canvas">
     <script src="pixi/config.js"></script> 
     <script src="pixi/main.js"></script>
+  </div>
+
+  <div id="results">
+	  results here
   </div>
 
 </body>
