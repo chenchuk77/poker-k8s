@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ranker-frontend-svc
+  labels:
+    app: ranker-app
+spec:
+  type: NodePort
+  selector:
+    layer: ranker-frontend
+  ports:
+  - port: 8080
+    nodePort: 32100
+    

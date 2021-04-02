@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ranker-frontend
+  labels:
+    layer: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      layer: ranker-frontend
+  template:
+    metadata:
+      labels:
+        layer: ranker-frontend
+    spec:
+      containers:
+      - name: ranker-frontend
+        image: chenchuk77/ranker-frontend:1.1
+        env:
+        - name: RANKER_ADDRESS
+          value: "$(RANKER_SVC_SERVICE_HOST)"
+        - name: RANKER_PORT
+          value: "$(RANKER_SVC_SERVICE_PORT)"
+
