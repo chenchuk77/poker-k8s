@@ -19,4 +19,15 @@ curl -s -X POST \
 	     grep -o '<div id="php_data".*>' |\
 	     cut -d ">" -f2 |\
 	     cut -d "." -f1 || echo "backend service unavailable."
-           
+
+# k8s check backend being used
+for x in $(seq 30); do
+  BACKEND_HOSTNAME=$(curl -s -X POST \
+                        -H "Content-Type: application/x-www-form-urlencoded" \
+                        -d "cards_string=Qc8c9dTs&samples=100" \
+                        http://$(minikube ip):${FRONTEND_NODEPORT}/index.php |\
+                             grep -o 'server_id.*' | cut -d '"' -f3 || echo "Unknown")
+  echo "request #${x} served by backend: ${BACKEND_HOSTNAME}."
+done
+
+

@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: ranker-frontend-svc
+  name: ranker-frontend
   labels:
     app: ranker-app
 spec:

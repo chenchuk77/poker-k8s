@@ -48,15 +48,20 @@
       
         // for debug, output to client js console
         echo("<script>console.log('PHP: " . $data . "');</script>");
-        $my_cards=$json->my_cards[0] . $json->my_cards[1];
-        $op_cards=$json->op_cards[0] . $json->op_cards[1];
-        $win_percent=$json->win_percent;
-        $draws_percent=$json->draws_percent;
+        $my_cards      =$json->my_cards[0] . $json->my_cards[1];
+        $op_cards      =$json->op_cards[0] . $json->op_cards[1];
+        $win_percent   =$json->win_percent;
+	$draws_percent =$json->draws_percent;
+	$ranker_id     =$json->server_id;
 
-        // dynamic result div
+        // dynamic result divs
         echo('<div id="php_data">');
         echo("$my_cards wins vs $op_cards about $win_percent% over $samples samples.");
-        echo('</div>');
+	echo('</div>');
+	echo('<div id="ranker_backend">');
+	echo("served by backend: $ranker_id.");
+	echo('</div>');
+
       }
     ?>
   </div>

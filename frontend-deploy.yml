@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ranker-frontend
-        image: chenchuk77/ranker-frontend:1.1
+        image: chenchuk77/ranker-frontend:1.2
         env:
         - name: RANKER_ADDRESS
           value: "$(RANKER_SVC_SERVICE_HOST)"

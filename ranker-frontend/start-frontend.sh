@@ -19,7 +19,7 @@ docker rm   $CONTAINER_NAME || true
 #	  -e RANKER_PORT=3000 \
 #          -v $(readlink -f html):/var/www/html \
 #          --name $CONTAINER_NAME \
-#          chenchuk77/$CONTAINER_NAME:1.0
+#          chenchuk77/$CONTAINER_NAME:1.2
 
 
 
@@ -29,5 +29,5 @@ docker run -d \
 	   -e RANKER_ADDRESS=172.17.0.1 \
 	   -e RANKER_PORT=3000 \
            --name $CONTAINER_NAME \
-           chenchuk77/$CONTAINER_NAME:1.0
+           chenchuk77/$CONTAINER_NAME:1.2
 
