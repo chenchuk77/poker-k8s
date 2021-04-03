@@ -1,0 +1,9 @@
+1. create pv and pvc
+k create -f mysql-pv.yml
+k create -f mysql-pvc.yml
+
+2. verify
+k get pv,pvc
+
+3. create deployment and svc
+

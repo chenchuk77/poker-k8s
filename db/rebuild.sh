@@ -1,8 +1,8 @@
 #!/bin/bash
 
 REPO=chenchuk77
-CONTAINER_NAME=ranker-frontend
-TAG=1.3
+CONTAINER_NAME=ranker-mysql
+TAG=1.1
 
 echo "building ${CONTAINER_NAME}:{TAG}"
 docker build -t ${REPO}/${CONTAINER_NAME}:${TAG} .

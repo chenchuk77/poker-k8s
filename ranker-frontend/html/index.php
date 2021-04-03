@@ -52,6 +52,7 @@
         $op_cards      =$json->op_cards[0] . $json->op_cards[1];
         $win_percent   =$json->win_percent;
 	$draws_percent =$json->draws_percent;
+	$lost_percent  =$json->lost_percent;
 	$ranker_id     =$json->server_id;
 
         // dynamic result divs
@@ -61,6 +62,30 @@
 	echo('<div id="ranker_backend">');
 	echo("served by backend: $ranker_id.");
 	echo('</div>');
+
+        $servername = $_SERVER["DB_ADDRESS"] . ":" . $_SERVER["DB_PORT"];
+        $username = "root";
+        $password = "password";
+        $dbname = "ranker";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+
+	$server_id      = $_SERVER['HOSTNAME'];
+        $sql = "INSERT INTO requests (request_time, processing_time ,frontend, backend, my_cards, op_cards, samples, win_percent, draws_percent, lost_percent)
+		VALUES ('now()', '0', '$server_id', '$ranker_id', '$my_cards', '$op_cards', '$samples', '$win_percent', '$draws_percent', '$lost_percent')";
+
+        if ($conn->query($sql) === TRUE) {
+          echo "New record created successfully";
+        } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $conn->close();
 
       }
     ?>
