@@ -1,0 +1,81 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ranker-backend
+  labels:
+    layer: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      layer: ranker-backend
+  template:
+    metadata:
+      labels:
+        layer: ranker-backend
+    spec:
+      containers:
+      - name: holdem-ranker
+        image: chenchuk77/holdem-ranker:1.1
+
+---        
+kind: Service
+apiVersion: v1
+metadata:
+  name: ranker-backend
+  labels:
+    app: ranker-app
+spec:
+  type: NodePort
+  selector:
+    layer: ranker-backend
+  ports:
+  - port: 3000
+    nodePort: 32000
+
+---    
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ranker-frontend
+  labels:
+    layer: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      layer: ranker-frontend
+  template:
+    metadata:
+      labels:
+        layer: ranker-frontend
+    spec:
+      containers:
+      - name: ranker-frontend
+        image: chenchuk77/ranker-frontend:1.3
+        env:
+        - name: RANKER_ADDRESS
+          value: "$(RANKER_BACKEND_SERVICE_HOST)"
+        - name: RANKER_PORT
+          value: "$(RANKER_BACKEND_SERVICE_PORT)"
+        - name: DB_ADDRESS
+          value: "$(MYSQL_SERVICE_HOST)"
+        - name: DB_PORT
+          value: "$(MYSQL_SERVICE_PORT)"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ranker-frontend
+  labels:
+    app: ranker-app
+spec:
+  type: NodePort
+  selector:
+    layer: ranker-frontend
+  ports:
+  - port: 8080
+    nodePort: 32100
+    

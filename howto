@@ -1,4 +1,7 @@
 useful commands:
 
-scale deployment to 1 for easy dev/debug:
+# push to dockerhub need auth first:
+$ docker login
+
+# scale deployment to 1 for easy dev/debug:
 $ k scale deployment holdem-ranker --replicas 1

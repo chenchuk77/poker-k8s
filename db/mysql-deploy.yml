@@ -14,7 +14,7 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: mysql:5.6
+      - image: chenchuk77/ranker-mysql:1.1
         name: mysql
         env:
           # Use secret in real usage

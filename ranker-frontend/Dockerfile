@@ -3,7 +3,7 @@ MAINTAINER chenchuk@gmail.com
 WORKDIR /var/www/html
 
 # can comment if start.sh is using -v for mounting
-#COPY ./html .
+COPY ./html .
 
 EXPOSE 8080
 

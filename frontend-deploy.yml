@@ -16,10 +16,16 @@ spec:
     spec:
       containers:
       - name: ranker-frontend
-        image: chenchuk77/ranker-frontend:1.2
+        image: chenchuk77/ranker-frontend:1.5
         env:
         - name: RANKER_ADDRESS
-          value: "$(RANKER_SVC_SERVICE_HOST)"
+          value: "$(RANKER_BACKEND_SERVICE_HOST)"
         - name: RANKER_PORT
-          value: "$(RANKER_SVC_SERVICE_PORT)"
+          value: "$(RANKER_BACKEND_SERVICE_PORT)"
+        - name: DB_ADDRESS
+          value: "$(MYSQL_SERVICE_HOST)"
+        - name: DB_PORT
+          value: "$(MYSQL_SERVICE_PORT)"
+
+
 

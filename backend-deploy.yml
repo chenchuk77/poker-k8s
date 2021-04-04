@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: holdem-ranker
+  name: ranker-backend
   labels:
     layer: backend
 spec:
